@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Wallace - Resume Deck | Limitless Energy Co.</title>
+    <meta name="description" content="Dylan Wallace - Renewable Energy Development & Battery Storage Expert with 25+ years of experience. Co-Founder, COO of Limitless Energy Co & Solar One.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #1a1a1a;
+        }
+        
+        .slide-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 230, 118, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        
+        .slide-nav button {
+            background: linear-gradient(135deg, #00E676 0%, #00C853 100%);
+            color: #000;
+            border: none;
+            padding: 10px 16px;
+            margin: 0 6px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3);
+        }
+        
+        .slide-nav button:hover {
+            background: linear-gradient(135deg, #00C853 0%, #00A843 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 230, 118, 0.4);
+        }
+        
+        .slide-nav button:disabled {
+            background: #444;
+            color: #888;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .slide-counter {
+            color: #00E676;
+            font-weight: 700;
+            font-size: 16px;
+            margin: 0 15px;
+            text-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
+        }
+        
+        iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+        
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00E676;
+            font-size: 18px;
+            background: #1a1a1a;
+            z-index: 999;
+        }
+        
+        .loading i {
+            margin-right: 12px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .slide-nav {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                padding: 12px 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .slide-nav button {
+                padding: 8px 12px;
+                font-size: 12px;
+                margin: 0 3px;
+            }
+            .slide-counter {
+                font-size: 14px;
+                margin: 0 8px;
+            }
+        }
+        
+        /* Keyboard navigation hint */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #00E676;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            opacity: 0.7;
+            z-index: 999;
+        }
+        
+        @media (max-width: 768px) {
+            .keyboard-hint {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <i class="fas fa-spinner fa-spin"></i>
+        Loading Dylan's Resume Deck...
+    </div>
+
+    <iframe id="slideFrame" src="slides/title_slide.html" style="display: none;" onload="hideLoading()"></iframe>
+
+    <div class="keyboard-hint">
+        Use ← → arrow keys or spacebar to navigate
+    </div>
+
+    <div class="slide-nav">
+        <button onclick="previousSlide()" id="prevBtn">
+            <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        <span class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+        </span>
+        <button onclick="nextSlide()" id="nextBtn">
+            Next <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <script>
+        const slides = [
+            'title_slide.html',
+            'executive_summary.html',
+            'track_record.html',
+            'battery_expertise.html',
+            'safety_compliance.html',
+            'licenses_certifications.html',
+            'technical_expertise.html',
+            'engineering_achievements.html',
+            'competitive_edge.html',
+            'contact.html'
+        ];
+
+        let currentSlideIndex = 0;
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('slideFrame').style.display = 'block';
+        }
+
+        function updateSlide() {
+            const iframe = document.getElementById('slideFrame');
+            iframe.src = `slides/${slides[currentSlideIndex]}`;
+            
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === slides.length - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                updateSlide();
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlide();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                event.preventDefault();
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                previousSlide();
+            } else if (event.key === 'Home') {
+                event.preventDefault();
+                currentSlideIndex = 0;
+                updateSlide();
+            } else if (event.key === 'End') {
+                event.preventDefault();
+                currentSlideIndex = slides.length - 1;
+                updateSlide();
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(event) {
+            touchStartX = event.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    previousSlide();
+                }
+            }
+        }
+
+        // Initialize
+        updateSlide();
+
+        // Prevent context menu on iframe
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // Ensure iframe fills viewport on resize
+        window.addEventListener('resize', function() {
+            const iframe = document.getElementById('slideFrame');
+            iframe.style.width = '100vw';
+            iframe.style.height = '100vh';
+        });
+    </script>
+</body>
+</html>
+
