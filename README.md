@@ -65,7 +65,7 @@ This is a professional resume deck presentation for Dylan Wallace, Co-Founder & 
 ## Features
 
 - **Navigation**: Use arrow keys or navigation buttons
-- **Responsive Design**: Works on desktop and mobile
+- **Improved Mobile-Friendly Design**: Works on desktop and mobile
 - **Professional Branding**: Limitless Energy Co. branding throughout
 - **Confidentiality Notice**: Legal protection on all slides
 - **Interactive Elements**: Smooth transitions and hover effects
